@@ -1,10 +1,6 @@
 console.log('Tom-agachi');
 
-// Requirements
-// Create a repo for your tomagotchi pet
-// make a commit after you finish each one of the following
-
-// Create a Class (JS Class, look at your notes if your forget) for your tomagotchi
+// Creates Tamagachi class
 class Tomagachi {
     constructor(name, imgFile){
         this.name = name,
@@ -12,10 +8,12 @@ class Tomagachi {
         this.sleepiness = 0,
         this.boredom = 0,
         this.age = 0,
-        this.imgFile = imgFile
+        this.imgFile = imgFile,
+        this.lightsOn = true
     }
 }
 
+// Creates tomFactory object to make the tom and hold the tom
 const tomFactory = {
     tomArr: [],
     makeTom(name, imgFile){
@@ -25,7 +23,7 @@ const tomFactory = {
     }
 };
 
-// instantiate Tom
+// instantiates the Tom
 tomFactory.makeTom('Tommy Fresh', 'https://i.pinimg.com/originals/a8/a0/b1/a8a0b1f02925966d3bcd341f9fe929fc.png');
 
 //function to put Tom on screen
@@ -47,7 +45,7 @@ const currentTom = tomFactory.tomArr[0];
 
 //function to create the board area
 const makeBoard = () => {
-    $('#tomagachi').append('<div id="arena"><h1>"Tom"-agachi</h1></div>');
+    $('#tomagachi').append('<div id="arena"></div>');
     $('#tomagachi').append('<div id="stats"><h1>stats</h1><ul class="statList"></ul></div>');
     $('#tomagachi').append('<div id="buttons"><h1>buttons</h1></div>')
 }
@@ -62,6 +60,7 @@ const makeStats = () => {
 const makeButtons = () => {
     $('#buttons').append('<div id="feed">Feed</div><div id="lightsOff">Turn Off Lights</div><div id="play">Play</div>');
 }
+
 
 // Render function clears board and reloads current stats, links to listenToStuff
 const render = () => {
@@ -83,13 +82,20 @@ const listenToStuff = () => {
             currentTom.hunger = currentTom.hunger-=1;
             render();
         } else if (e.target.id === 'lightsOff'){
-            // code to turn arena id background to black
-            render();
+            if (currentTom.lightsOn){
+                currentTom.sleepiness--;
+                render();
+                $('#arena').css('background-image', 'url("https://townsquare.media/site/518/files/2017/11/Night-sky.jpg")');
+                currentTom.lightsOn = !currentTom.lightsOn;
+            } else {
+                render();
+                currentTom.lightsOn = !currentTom.lightsOn;
+            }
+            
         } else if (e.target.id === 'play'){
             currentTom.boredom = currentTom.boredom-=1;
             render();
         }
-        console.log(e.target);
     });
 }
 
