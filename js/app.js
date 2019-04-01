@@ -31,9 +31,8 @@ const makeTom = () => {
     $('#arena').append(`<img src="${tomFactory.tomArr[0].imgFile}" height="100" width="85">`);
 }
 
-console.log(tomFactory.tomArr[0].name)
-
-
+//lets user name their pet
+$('#heading').append('<form><input type="text" id="userName"><button type="submit">Name your pet!</button></form>');
 
 // Display the following metrics for your pet:
 // Hunger (1-10 scale)
@@ -45,9 +44,11 @@ const currentTom = tomFactory.tomArr[0];
 
 //function to create the board area
 const makeBoard = () => {
+    $('#title').text(`${currentTom.name}`);
     $('#tomagachi').append('<div id="arena"></div>');
     $('#tomagachi').append('<div id="stats"><h1>stats</h1><ul class="statList"></ul></div>');
-    $('#tomagachi').append('<div id="buttons"><h1>buttons</h1></div>')
+    $('#tomagachi').append('<div id="buttons"><h1>buttons</h1></div>');
+    
 }
 
 // makeStats puts the stats on the screen
@@ -97,7 +98,22 @@ const listenToStuff = () => {
             render();
         }
     });
+
+    $('form').on('submit', (e) => {
+        e.preventDefault();
+    
+        //retreiving the users input
+        const inputValue = $('#userName').val();
+        //add the value to the array
+        currentTom.name = inputValue;
+    
+        //clear the input
+        $('#userName').val('');
+        $('form').remove();
+        render();
+    })
 }
+
 
 render();
 
