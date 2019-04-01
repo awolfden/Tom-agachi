@@ -24,21 +24,16 @@ const tomFactory = {
 };
 
 // instantiates the Tom
-tomFactory.makeTom('Tommy Fresh', 'https://i.pinimg.com/originals/a8/a0/b1/a8a0b1f02925966d3bcd341f9fe929fc.png');
+tomFactory.makeTom('Tommy-gochi', 'https://i.pinimg.com/originals/a8/a0/b1/a8a0b1f02925966d3bcd341f9fe929fc.png');
 
 //function to put Tom on screen
 const makeTom = () => {
-    $('#arena').append(`<img src="${tomFactory.tomArr[0].imgFile}" height="100" width="85">`);
+    $('#arena').append(`<img src="${tomFactory.tomArr[0].imgFile}" height="150" width="128">`);
 }
 
 //lets user name their pet
 $('#heading').append('<form><input type="text" id="userName"><button type="submit">Name your pet!</button></form>');
 
-// Display the following metrics for your pet:
-// Hunger (1-10 scale)
-// Sleepiness (1-10 scale)
-// Boredom (1-10 scale)
-// Age
 
 const currentTom = tomFactory.tomArr[0];
 
@@ -121,11 +116,6 @@ render();
 
 
 
-
-// Add the ability to name your pet. - CHECK
-
-// Style the page.
-
 // Increase your pet's age every x minutes
 // Increase your pet's Hunger, Sleepiness, and Bored metrics on an interval of your choosing.
 // You pet should die if Hunger, Boredom, or Sleepiness hits 10.
@@ -136,4 +126,38 @@ render();
 // ...with special powers (extend the class)!
 // Add an excercise() method to your tomagotchi, that affects certain properties
 // Add anything you can think of... use your imagination!
+
+
+let seconds = 0;
+
+
+
+const secondsGoUp = () => {
+    seconds ++;
+    console.log(seconds);
+    if(seconds % 600 === 0){
+        currentTom.age++;
+        render();
+    } else if (seconds % 75 === 0){
+        currentTom.hunger++;
+        render();
+    } else if (seconds % 100 === 0) {
+        currentTom.sleepiness++;
+        render();
+    } else if (seconds % 110 === 0) {
+        currentTom.boredom++;
+        render();
+    } else if (currentTom.hunger >= 10 || currentTom.sleepiness >= 10 || currentTom.boredom >= 10){
+        clearInterval(timer);
+        currentTom.imgFile = 'http://66.media.tumblr.com/tumblr_m8ich6yKbz1r0n9bmo3_250.gif';
+        render();
+        alert('YOU KILLED TOMMY! YOU MONSTER!!!');
+    }
+}
+
+const timer = setInterval(secondsGoUp, 10);
+
+
+
+
 
