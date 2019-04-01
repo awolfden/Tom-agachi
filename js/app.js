@@ -46,14 +46,14 @@ const currentTom = tomFactory.tomArr[0];
 const makeBoard = () => {
     $('#title').text(`${currentTom.name}`);
     $('#tomagachi').append('<div id="arena"></div>');
-    $('#tomagachi').append('<div id="stats"><h1>stats</h1><ul class="statList"></ul></div>');
-    $('#tomagachi').append('<div id="buttons"><h1>buttons</h1></div>');
+    $('#stat-container').append('<div id="stats"><h1>Stats</h1><ul class="statList"></ul></div>');
+    $('#button-container').append('<div id="buttons"><h1>Tommy Needs Attention</h1></div>');
     
 }
 
 // makeStats puts the stats on the screen
 const makeStats = () => {
-    $('.statList').append(`<p>Name: ${currentTom.name}</p><br><p>Hunger: ${currentTom.hunger}</p><br><p>Sleepiness: ${currentTom.sleepiness}</p><br><p>Boredom: ${currentTom.boredom}</p><br><p>Age: ${currentTom.age}</p>`)
+    $('.statList').append(`<li>Name: ${currentTom.name}</li><li>Hunger: ${currentTom.hunger}</li><li>Sleepiness: ${currentTom.sleepiness}</li><li>Boredom: ${currentTom.boredom}</li><li>Age: ${currentTom.age}</li>`)
 
 }
 
@@ -122,8 +122,10 @@ render();
 
 
 
-// Add the ability to name your pet.
+// Add the ability to name your pet. - CHECK
+
 // Style the page.
+
 // Increase your pet's age every x minutes
 // Increase your pet's Hunger, Sleepiness, and Bored metrics on an interval of your choosing.
 // You pet should die if Hunger, Boredom, or Sleepiness hits 10.
