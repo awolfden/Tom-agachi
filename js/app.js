@@ -52,21 +52,18 @@ const makeBoard = () => {
     $('#tomagachi').append('<div id="buttons"><h1>buttons</h1></div>')
 }
 
-//function to load current stats
+// makeStats puts the stats on the screen
 const makeStats = () => {
     $('.statList').append(`<p>Name: ${currentTom.name}</p><br><p>Hunger: ${currentTom.hunger}</p><br><p>Sleepiness: ${currentTom.sleepiness}</p><br><p>Boredom: ${currentTom.boredom}</p><br><p>Age: ${currentTom.age}</p>`)
 
 }
 
-// function to add buttons for feed, turn off lights, and play
+// makeButtons puts the buttons on the screen
 const makeButtons = () => {
     $('#buttons').append('<div id="feed">Feed</div><div id="lightsOff">Turn Off Lights</div><div id="play">Play</div>');
 }
 
-
-
-
-
+// Render function clears board and reloads current stats, links to listenToStuff
 const render = () => {
    $('#stats').remove();
    $('#buttons').remove();
@@ -98,8 +95,7 @@ const listenToStuff = () => {
 
 render();
 
-//adds listener to buttons
-//adds logic for buttons to adjust stats
+
 
 
 
