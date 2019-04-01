@@ -120,6 +120,8 @@ render();
 // Increase your pet's Hunger, Sleepiness, and Bored metrics on an interval of your choosing.
 // You pet should die if Hunger, Boredom, or Sleepiness hits 10.
 // Morph your pet at certain ages.
+
+
 // Animate your pet across the screen while it's alive.
 // Extras
 // Have your tomagotchi give birth to baby tomagotchi...
@@ -151,7 +153,10 @@ const secondsGoUp = () => {
         clearInterval(timer);
         currentTom.imgFile = 'http://66.media.tumblr.com/tumblr_m8ich6yKbz1r0n9bmo3_250.gif';
         render();
-        alert('YOU KILLED TOMMY! YOU MONSTER!!!');
+        $('#arena').append('<div id="death"><h1>YOU KILLED TOMMY!<br>YOU MONSTER!</h1></div>')
+    } else if (currentTom.age >= 3){
+        currentTom.imgFile = 'http://i.imgur.com/vV0AA0q.jpg?1';
+        render();
     }
 }
 

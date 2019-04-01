@@ -9,10 +9,6 @@ body {
     max-width: 660px;
 }
 
-div {
-    
-}
-
 h1 {
     text-align: center;
     font-size: 30px;
@@ -80,4 +76,9 @@ ul {
 
 #buttons div:hover {
     background-color: gray;
+}
+
+#death {
+    background-color: black;
+    color: white;
 }
