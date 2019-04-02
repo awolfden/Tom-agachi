@@ -37,15 +37,14 @@ const goTomGo = () => {
 };
 
 const goTommyTwo = () => {
-    for(let i = 0; i < 10000; i++){
+    for(let i = 0; i < 3; i++){
+        console.log('made it past for loop')
         $('#upgrade').animate({
-            'width': '280px',
-            'height': '300px'    
+            'left': '600px',    
             }, 3000);
-            
+        console.log('made it past animation 1')
         $('#upgrade').animate({
-            'width': '140px',
-            'height': '150px'    
+            'left': '0px'    
             }, 3000);
     }
 };
@@ -81,22 +80,19 @@ const makeStats = () => {
 
 }
 
-// makeButtons puts the buttons on the screen
-const makeButtons = () => {
-    $('#buttons').append('<div id="feed">Feed</div><div id="lightsOff">Turn Off Lights</div><div id="play">Play</div>');
-}
-
 const refreshStats = () => {
     $('#stats').remove();
     $('#stat-container').append('<div id="stats"><h1>Stats</h1><ul class="statList"></ul></div>');
     makeStats()
 }
 
+// makeButtons puts the buttons on the screen
+const makeButtons = () => {
+    $('#buttons').append('<div id="feed">Feed</div><div id="lightsOff">Turn Off Lights</div><div id="play">Play</div>');
+}
+
 // Render function clears board and reloads current stats, links to listenToStuff
 const render = () => {
-   $('#stats').remove();
-   $('#buttons').remove();
-   $('#arena').remove();
 
     makeBoard();
     makeStats();
@@ -105,6 +101,7 @@ const render = () => {
     listenToStuff();
 
     goTomGo();
+
 }
 
 // Function checks if its time for tom to morph
@@ -115,13 +112,13 @@ const morphinTime = () => {
         tomFactory.makeTom('Tommy-gochi', 'http://www.nebeep.com/wp-content/uploads/2018/02/TomHaverford.jpg');
         makeTommy();
         $('#arena img').attr('id', 'upgrade');
-        goTommyTwo();
+        //goTommyTwo();
     } 
 };
 
 // Function checks if stats need updating based on time and udates them through render()
 const statTracker = () => {
-    if (seconds % 53 === 0){
+    if (seconds % 43 === 0){
         currentTom.hunger++;
         refreshStats();
     } else if (seconds % 67 === 0) {
@@ -132,7 +129,7 @@ const statTracker = () => {
     } else if (seconds % 71 === 0) {
         currentTom.boredom++;
         refreshStats();
-    } else if(seconds % 101 === 0){
+    } else if(seconds % 53 === 0){
         currentTom.age++;
         refreshStats();
     } 
@@ -158,7 +155,6 @@ const isTomDead = () => {
     }
 };
 
-
 // Sets listener to the form input and button - above other stuff, below render
 $('form').on('submit', (e) => {
     //prevents a server request from being sent and page reload
@@ -171,7 +167,7 @@ $('form').on('submit', (e) => {
     //clear the input
     $('#userName').val('');
     $('form').remove();
-    render();
+    refreshStats();
 });
 
 //function to listen to the buttons
@@ -204,14 +200,13 @@ const secondsGoUp = () => {
     morphinTime();
     isTomDead();
 }
-
 const timer = setInterval(secondsGoUp, 100);
 
 
-
-
-
+// Loads the game board when the page loads
 render();
+
+
 
 
 // Extras

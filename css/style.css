@@ -147,3 +147,6 @@ ul {
     transition: 2s linear; 
 }
 
+#upgrade {
+    object-fit: cover;
+}
