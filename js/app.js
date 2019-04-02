@@ -23,7 +23,32 @@ const tomFactory = {
     }
 };
 
+// Animation Functions
+const goTomGo = () => {
+    for(let i = 0; i < 10000; i++){
+        $('#arena img').animate({
+            'left': '600px',    
+            }, 3000);
+            
+        $('#arena img').animate({
+            'left': '0px'    
+            }, 3000);
+    }
+};
 
+const goTommyTwo = () => {
+    for(let i = 0; i < 10000; i++){
+        $('#upgrade').animate({
+            'width': '280px',
+            'height': '300px'    
+            }, 3000);
+            
+        $('#upgrade').animate({
+            'width': '140px',
+            'height': '150px'    
+            }, 3000);
+    }
+};
 
 // Keeps track of the seconds
 let seconds = 0;
@@ -89,7 +114,8 @@ const morphinTime = () => {
         tomFactory.tomArr.pop();
         tomFactory.makeTom('Tommy-gochi', 'http://www.nebeep.com/wp-content/uploads/2018/02/TomHaverford.jpg');
         makeTommy();
-        //goTomGo();
+        $('#arena img').attr('id', 'upgrade');
+        goTommyTwo();
     } 
 };
 
@@ -182,17 +208,7 @@ const secondsGoUp = () => {
 const timer = setInterval(secondsGoUp, 100);
 
 
-const goTomGo = () => {
-    for(let i = 0; i < 10000; i++){
-        $('#arena img').animate({
-            'left': '600px',    
-            }, 3000);
-            
-        $('#arena img').animate({
-            'left': '0px'    
-            }, 3000);
-    }
-}
+
 
 
 render();
