@@ -35,7 +35,7 @@ const makeTom = () => {
 }
 
 //lets user name their pet
-$('#heading').append('<form><input type="text" id="userName"><button type="submit">Name your pet!</button></form>');
+$('#heading').append('<form><input type="text" placeholder="Tommy Fresh" id="userName"><button id="submit" type="submit">Name your pet!</button></form>');
 
 
 const currentTom = tomFactory.tomArr[0];
@@ -76,10 +76,10 @@ const render = () => {
 
 // Function checks if its time for tom to morph
 const morphinTime = () => {
-    if(seconds % 600 === 0){
+    if(seconds % 500 === 0){
         currentTom.age++;
         render();
-    } else if (currentTom.age >= 3){
+    } else if (currentTom.age === 3){ //this is where the problem is <--- no mo' buttons!
         currentTom.imgFile = 'http://i.imgur.com/vV0AA0q.jpg?1';
         render();
     }

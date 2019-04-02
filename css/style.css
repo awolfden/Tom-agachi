@@ -17,6 +17,23 @@ h1 {
     padding: 5px;
 }
 
+#submit {
+    background-color: #434547;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 4px 10px;
+    margin-left: 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 10px;
+}
+
+#submit:hover {
+    background-color: #545268;
+}
+
 #title {
     font-size: 50px;
     font-weight: bold;
@@ -26,9 +43,18 @@ h1 {
 
 form {
     text-align: center;
-    padding: 25px;
+    padding: 5px;
+    margin: 10px;
     background-color: #c9c5c1;
+    border-radius: 15px;
+    
 }
+
+input[type=text] {
+    border: 2px solid gray;
+    border-radius: 4px;
+    padding: 2px;
+  }
 
 ul {
     list-style-type: none;
@@ -45,10 +71,14 @@ ul {
 }
 
 #arena {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-top: 40px;
     background: url('https://www.cambridgema.gov/~/media/Images/sharedphotos/departmentphotos/City-COuncil.jpg?mw=767');
     background-color: gray;
     background-size: cover;
-    min-height: 300px;
+    height: 200px;
 }
 
 #arena img {
@@ -99,10 +129,17 @@ ul {
 #death {
     background-color: black;
     color: white;
+    margin: 10px;
 }
+
 
 #heading div {
     color: #2e2561;
     border: 5px solid #40357f;
     font-size: 35px;
+}
+
+.hide {
+    visibility: hidden;
+    transition: 2s linear; 
 }
