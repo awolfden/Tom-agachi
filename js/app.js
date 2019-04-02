@@ -69,10 +69,26 @@ const render = () => {
     makeButtons();
     makeTom();
     listenToStuff();
+    
 }
 
+// Sets listener to the form input and button - above other stuff, below render
+$('form').on('submit', (e) => {
+    e.preventDefault();
+
+    //retreiving the users input
+    const inputValue = $('#userName').val();
+    //add the value to the array
+    currentTom.name = inputValue;
+
+    //clear the input
+    $('#userName').val('');
+    $('form').remove();
+    render();
+});
+
 //function to listen to the buttons
-const listenToStuff = () => {
+const listenToStuff = () => {    
     $('#buttons').on('click', (e) => {
         if(e.target.id === 'feed'){
             currentTom.hunger = currentTom.hunger-=1;
@@ -84,8 +100,9 @@ const listenToStuff = () => {
                 $('#arena').css('background-image', 'url("https://townsquare.media/site/518/files/2017/11/Night-sky.jpg")');
                 currentTom.lightsOn = !currentTom.lightsOn;
             } else {
-                render();
+                //currentTom.sleepiness--;
                 currentTom.lightsOn = !currentTom.lightsOn;
+                render();
             }
             
         } else if (e.target.id === 'play'){
@@ -93,27 +110,62 @@ const listenToStuff = () => {
             render();
         }
     });
-
-    $('form').on('submit', (e) => {
-        e.preventDefault();
-    
-        //retreiving the users input
-        const inputValue = $('#userName').val();
-        //add the value to the array
-        currentTom.name = inputValue;
-    
-        //clear the input
-        $('#userName').val('');
-        $('form').remove();
-        render();
-    })
 }
 
 
+// The timer stuff and logic for what happens based off of it
+let seconds = 0;
+
+const morphinTime = () => {
+    if(seconds % 600 === 0){
+        currentTom.age++;
+        render();
+    } else if (currentTom.age >= 3){
+        currentTom.imgFile = 'http://i.imgur.com/vV0AA0q.jpg?1';
+        render();
+    }
+};
+
+const statTracker = () => {
+    if (seconds % 75 === 0){
+        currentTom.hunger++;
+        render();
+    } else if (seconds % 100 === 0) {
+        currentTom.sleepiness++;
+        render();
+    } else if (seconds % 90 === 0) {
+        currentTom.boredom++;
+        render();
+    }
+};
+
+const isTomDead = () => {
+    if (currentTom.hunger >= 10 || currentTom.sleepiness >= 10 || currentTom.boredom >= 10){
+        clearInterval(timer);
+        currentTom.imgFile = 'http://66.media.tumblr.com/tumblr_m8ich6yKbz1r0n9bmo3_250.gif';
+        render();
+        $('#heading').append('<div id="death"><h1>YOU KILLED TOMMY!<br>YOU MONSTER!</h1></div>');
+
+    } else if (currentTom.hunger < 0 || currentTom.sleepiness < 0 || currentTom.boredom < 0){
+        clearInterval(timer);
+        currentTom.imgFile = 'http://66.media.tumblr.com/tumblr_m8ich6yKbz1r0n9bmo3_250.gif';
+        render();
+        $('#heading').append('<div id="death"><h1>YOU KILLED TOMMY!<br>YOU MONSTER!</h1></div>');
+        
+    } 
+};
+
+const secondsGoUp = () => {
+    seconds ++;
+    console.log(seconds);
+    
+    morphinTime();
+    statTracker();
+    isTomDead();
+}
+
+const timer = setInterval(secondsGoUp, 10);
 render();
-
-
-
 
 
 // Increase your pet's age every x minutes
@@ -130,37 +182,6 @@ render();
 // Add anything you can think of... use your imagination!
 
 
-let seconds = 0;
-
-
-
-const secondsGoUp = () => {
-    seconds ++;
-    console.log(seconds);
-    if(seconds % 600 === 0){
-        currentTom.age++;
-        render();
-    } else if (seconds % 75 === 0){
-        currentTom.hunger++;
-        render();
-    } else if (seconds % 100 === 0) {
-        currentTom.sleepiness++;
-        render();
-    } else if (seconds % 110 === 0) {
-        currentTom.boredom++;
-        render();
-    } else if (currentTom.hunger >= 10 || currentTom.sleepiness >= 10 || currentTom.boredom >= 10){
-        clearInterval(timer);
-        currentTom.imgFile = 'http://66.media.tumblr.com/tumblr_m8ich6yKbz1r0n9bmo3_250.gif';
-        render();
-        $('#arena').append('<div id="death"><h1>YOU KILLED TOMMY!<br>YOU MONSTER!</h1></div>')
-    } else if (currentTom.age >= 3){
-        currentTom.imgFile = 'http://i.imgur.com/vV0AA0q.jpg?1';
-        render();
-    }
-}
-
-const timer = setInterval(secondsGoUp, 10);
 
 
 

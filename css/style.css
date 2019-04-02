@@ -6,7 +6,8 @@ body {
 }
 
 #project {
-    max-width: 660px;
+    width: 80%;
+    min-width: 700px;
 }
 
 h1 {
@@ -36,12 +37,12 @@ ul {
 .flex-container {
     display: flex;
     flex-direction: row;
-    justify-content: left;
+    justify-content: center;
 
 }
 
 #arena {
-    background: url('https://farm5.staticflickr.com/4434/37311173122_b6e22f6ed8_b.jpg');
+    background: url('https://www.cambridgema.gov/~/media/Images/sharedphotos/departmentphotos/City-COuncil.jpg?mw=767');
     background-color: gray;
     background-size: cover;
     min-height: 300px;
@@ -53,7 +54,9 @@ ul {
 }
 
 #stat-container {
-    width: 30%
+    width: 30%;
+    background: #434547;
+    color: white;
 }
 
 #stats {
@@ -81,4 +84,10 @@ ul {
 #death {
     background-color: black;
     color: white;
+}
+
+#heading div {
+    color: #2e2561;
+    border: 5px solid #40357f;
+    font-size: 35px;
 }
