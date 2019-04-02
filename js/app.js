@@ -23,6 +23,9 @@ const tomFactory = {
     }
 };
 
+// Keeps track of the seconds
+let seconds = 0;
+
 // instantiates the Tom
 tomFactory.makeTom('Tommy-gochi', 'https://i.pinimg.com/originals/a8/a0/b1/a8a0b1f02925966d3bcd341f9fe929fc.png');
 
@@ -69,16 +72,58 @@ const render = () => {
     makeButtons();
     makeTom();
     listenToStuff();
-    
 }
+
+// Function checks if its time for tom to morph
+const morphinTime = () => {
+    if(seconds % 600 === 0){
+        currentTom.age++;
+        render();
+    } else if (currentTom.age >= 3){
+        currentTom.imgFile = 'http://i.imgur.com/vV0AA0q.jpg?1';
+        render();
+    }
+};
+
+// Function checks if stats need updating based on time and udates them through render()
+const statTracker = () => {
+    if (seconds % 75 === 0){
+        currentTom.hunger++;
+        render();
+    } else if (seconds % 100 === 0) {
+        currentTom.sleepiness++;
+        render();
+    } else if (seconds % 90 === 0) {
+        currentTom.boredom++;
+        render();
+    }
+};
+
+// Function checks if it's time for tom to die
+const isTomDead = () => {
+    if (currentTom.hunger >= 10 || currentTom.sleepiness >= 10 || currentTom.boredom >= 10){
+        clearInterval(timer);
+        currentTom.imgFile = 'http://66.media.tumblr.com/tumblr_m8ich6yKbz1r0n9bmo3_250.gif';
+        render();
+        $('#heading').append('<div id="death"><h1>YOU KILLED TOMMY!<br>YOU MONSTER!</h1></div>');
+
+    } else if (currentTom.hunger < 0 || currentTom.sleepiness < 0 || currentTom.boredom < 0){
+        clearInterval(timer);
+        currentTom.imgFile = 'http://66.media.tumblr.com/tumblr_m8ich6yKbz1r0n9bmo3_250.gif';
+        render();
+        $('#heading').append('<div id="death"><h1>YOU KILLED TOMMY!<br>YOU MONSTER!</h1></div>');
+        
+    } 
+};
+
 
 // Sets listener to the form input and button - above other stuff, below render
 $('form').on('submit', (e) => {
+    //prevents a server request from being sent and page reload
     e.preventDefault();
-
     //retreiving the users input
     const inputValue = $('#userName').val();
-    //add the value to the array
+    //add the value to the currentTom object name property
     currentTom.name = inputValue;
 
     //clear the input
@@ -98,13 +143,8 @@ const listenToStuff = () => {
                 currentTom.sleepiness--;
                 render();
                 $('#arena').css('background-image', 'url("https://townsquare.media/site/518/files/2017/11/Night-sky.jpg")');
-                currentTom.lightsOn = !currentTom.lightsOn;
-            } else {
-                //currentTom.sleepiness--;
-                currentTom.lightsOn = !currentTom.lightsOn;
-                render();
-            }
-            
+            } 
+
         } else if (e.target.id === 'play'){
             currentTom.boredom = currentTom.boredom-=1;
             render();
@@ -112,49 +152,7 @@ const listenToStuff = () => {
     });
 }
 
-
-// The timer stuff and logic for what happens based off of it
-let seconds = 0;
-
-const morphinTime = () => {
-    if(seconds % 600 === 0){
-        currentTom.age++;
-        render();
-    } else if (currentTom.age >= 3){
-        currentTom.imgFile = 'http://i.imgur.com/vV0AA0q.jpg?1';
-        render();
-    }
-};
-
-const statTracker = () => {
-    if (seconds % 75 === 0){
-        currentTom.hunger++;
-        render();
-    } else if (seconds % 100 === 0) {
-        currentTom.sleepiness++;
-        render();
-    } else if (seconds % 90 === 0) {
-        currentTom.boredom++;
-        render();
-    }
-};
-
-const isTomDead = () => {
-    if (currentTom.hunger >= 10 || currentTom.sleepiness >= 10 || currentTom.boredom >= 10){
-        clearInterval(timer);
-        currentTom.imgFile = 'http://66.media.tumblr.com/tumblr_m8ich6yKbz1r0n9bmo3_250.gif';
-        render();
-        $('#heading').append('<div id="death"><h1>YOU KILLED TOMMY!<br>YOU MONSTER!</h1></div>');
-
-    } else if (currentTom.hunger < 0 || currentTom.sleepiness < 0 || currentTom.boredom < 0){
-        clearInterval(timer);
-        currentTom.imgFile = 'http://66.media.tumblr.com/tumblr_m8ich6yKbz1r0n9bmo3_250.gif';
-        render();
-        $('#heading').append('<div id="death"><h1>YOU KILLED TOMMY!<br>YOU MONSTER!</h1></div>');
-        
-    } 
-};
-
+// Function adds to the seconds and call the other related functinos
 const secondsGoUp = () => {
     seconds ++;
     console.log(seconds);
@@ -164,17 +162,17 @@ const secondsGoUp = () => {
     isTomDead();
 }
 
-const timer = setInterval(secondsGoUp, 10);
+const timer = setInterval(secondsGoUp, 100);
 render();
 
 
-// Increase your pet's age every x minutes
-// Increase your pet's Hunger, Sleepiness, and Bored metrics on an interval of your choosing.
-// You pet should die if Hunger, Boredom, or Sleepiness hits 10.
-// Morph your pet at certain ages.
+
+// Morph your pet at certain ages. <-- BUTTONS STOP WORKING AFTER MORPH!! WTF!?!?
 
 
 // Animate your pet across the screen while it's alive.
+
+
 // Extras
 // Have your tomagotchi give birth to baby tomagotchi...
 // ...with special powers (extend the class)!

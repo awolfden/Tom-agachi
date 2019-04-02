@@ -1,8 +1,8 @@
 
 
-
 body {
     font-family: Calibri, 'Trebuchet MS', sans-serif;
+    background: gray;
 }
 
 #project {
@@ -18,7 +18,10 @@ h1 {
 }
 
 #title {
-    font-size: 40px;
+    font-size: 50px;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+    padding: 15px;
 }
 
 form {
@@ -61,14 +64,21 @@ ul {
 
 #stats {
     border: none;
+
 }
+
+#stats h1 {
+    color: black;
+    background-color: #eaeaef;
+}
+
 
 #button-container {
     width: 70%;
 }
 
 #buttons div {
-    background-color: #c9c5c1;
+    background-color: #706d6a;
     border: none;
     color: white;
     padding: 15px 32px;
@@ -78,7 +88,12 @@ ul {
 }
 
 #buttons div:hover {
-    background-color: gray;
+    background-color: #545268;
+}
+
+#buttons h1 {
+    color: black;
+    background-color: #c9c9d4;
 }
 
 #death {
