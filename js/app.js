@@ -9,7 +9,8 @@ class Tomagachi {
         this.boredom = 0,
         this.age = 0,
         this.imgFile = imgFile,
-        this.lightsOn = true
+        this.lightsOn = true,
+        this.alive = true
     }
 }
 
@@ -60,6 +61,10 @@ const makeButtons = () => {
     $('#buttons').append('<div id="feed">Feed</div><div id="lightsOff">Turn Off Lights</div><div id="play">Play</div>');
 }
 
+const refreshStats = () => {
+    $('#stats').remove();
+    makeStats()
+}
 
 // Render function clears board and reloads current stats, links to listenToStuff
 const render = () => {
@@ -72,29 +77,37 @@ const render = () => {
     makeButtons();
     makeTom();
     listenToStuff();
+
+    $('#arena img').animate({
+        'left': '750px',
+        'bottom': '40px'    
+    }, 8000);
 }
 
 // Function checks if its time for tom to morph
-const morphinTime = () => {
-    if(seconds % 500 === 0){
-        currentTom.age++;
-        render();
-    } else if (currentTom.age === 3){ //this is where the problem is <--- no mo' buttons!
+const morphinTime = () => { 
+    if (currentTom.age > 3){ //this is where the problem is <--- no mo' buttons!
         currentTom.imgFile = 'http://i.imgur.com/vV0AA0q.jpg?1';
+
+    } else if(seconds % 75 === 0){
+        currentTom.age++;
         render();
     }
 };
 
 // Function checks if stats need updating based on time and udates them through render()
 const statTracker = () => {
-    if (seconds % 75 === 0){
+    if (seconds % 50 === 0){
         currentTom.hunger++;
         render();
-    } else if (seconds % 100 === 0) {
+    } else if (seconds % 68 === 0) {
         currentTom.sleepiness++;
         render();
-    } else if (seconds % 90 === 0) {
+    } else if (seconds % 71 === 0) {
         currentTom.boredom++;
+        render();
+    } else if (seconds % 100 === 0) {
+        currentTom.age++;
         render();
     }
 };
@@ -102,12 +115,14 @@ const statTracker = () => {
 // Function checks if it's time for tom to die
 const isTomDead = () => {
     if (currentTom.hunger >= 10 || currentTom.sleepiness >= 10 || currentTom.boredom >= 10){
+        currentTom['alive'] = false;
         clearInterval(timer);
         currentTom.imgFile = 'http://66.media.tumblr.com/tumblr_m8ich6yKbz1r0n9bmo3_250.gif';
         render();
         $('#heading').append('<div id="death"><h1>YOU KILLED TOMMY!<br>YOU MONSTER!</h1></div>');
 
     } else if (currentTom.hunger < 0 || currentTom.sleepiness < 0 || currentTom.boredom < 0){
+        currentTom['alive'] = false;
         clearInterval(timer);
         currentTom.imgFile = 'http://66.media.tumblr.com/tumblr_m8ich6yKbz1r0n9bmo3_250.gif';
         render();
@@ -152,11 +167,14 @@ const listenToStuff = () => {
     });
 }
 
+
+
 // Function adds to the seconds and call the other related functinos
 const secondsGoUp = () => {
     seconds ++;
     console.log(seconds);
     
+
     morphinTime();
     statTracker();
     isTomDead();
@@ -164,6 +182,10 @@ const secondsGoUp = () => {
 
 const timer = setInterval(secondsGoUp, 100);
 render();
+
+
+
+
 
 
 
