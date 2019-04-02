@@ -26,8 +26,8 @@ const tomFactory = {
 
 const goTomGo = () => {
     $('#arena img').animate({
-        'left': '750px',
-        'bottom': '40px'    
+        'left': '600px',
+        'bottom': '20px'    
     }, 8000);
 }
 
@@ -86,36 +86,32 @@ const render = () => {
     makeTom();
     listenToStuff();
 
-
+    goTomGo();
 }
 
 // Function checks if its time for tom to morph
 const morphinTime = () => { 
-    if (currentTom.age > 3){ //this is where the problem is <--- no mo' buttons!
+    if (currentTom.age > 3){ 
         currentTom.imgFile = 'http://i.imgur.com/vV0AA0q.jpg?1';
         $('#arena img').remove();
         makeTom();
-    } else if(seconds % 75 === 0){
-        currentTom.age++;
-        render();
+        goTomGo();
     } 
 };
 
 // Function checks if stats need updating based on time and udates them through render()
 const statTracker = () => {
-    if (seconds % 25 === 0){
-        $('#arena img').animate({
-            'left': '750px',
-            'bottom': '40px'    
-        }, 5000);
-    } else if (seconds % 52 === 0){
+    if (seconds % 53 === 0){
         currentTom.hunger++;
         refreshStats();
-    } else if (seconds % 68 === 0) {
+    } else if (seconds % 67 === 0) {
         currentTom.sleepiness++;
         refreshStats();
     } else if (seconds % 71 === 0) {
         currentTom.boredom++;
+        refreshStats();
+    } else if(seconds % 101 === 0){
+        currentTom.age++;
         refreshStats();
     } 
 };
