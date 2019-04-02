@@ -24,6 +24,13 @@ const tomFactory = {
     }
 };
 
+const goTomGo = () => {
+    $('#arena img').animate({
+        'left': '750px',
+        'bottom': '40px'    
+    }, 8000);
+}
+
 // Keeps track of the seconds
 let seconds = 0;
 
@@ -63,6 +70,7 @@ const makeButtons = () => {
 
 const refreshStats = () => {
     $('#stats').remove();
+    $('#stat-container').append('<div id="stats"><h1>Stats</h1><ul class="statList"></ul></div>');
     makeStats()
 }
 
@@ -78,38 +86,38 @@ const render = () => {
     makeTom();
     listenToStuff();
 
-    $('#arena img').animate({
-        'left': '750px',
-        'bottom': '40px'    
-    }, 8000);
+
 }
 
 // Function checks if its time for tom to morph
 const morphinTime = () => { 
     if (currentTom.age > 3){ //this is where the problem is <--- no mo' buttons!
         currentTom.imgFile = 'http://i.imgur.com/vV0AA0q.jpg?1';
-
+        $('#arena img').remove();
+        makeTom();
     } else if(seconds % 75 === 0){
         currentTom.age++;
         render();
-    }
+    } 
 };
 
 // Function checks if stats need updating based on time and udates them through render()
 const statTracker = () => {
-    if (seconds % 50 === 0){
+    if (seconds % 25 === 0){
+        $('#arena img').animate({
+            'left': '750px',
+            'bottom': '40px'    
+        }, 5000);
+    } else if (seconds % 52 === 0){
         currentTom.hunger++;
-        render();
+        refreshStats();
     } else if (seconds % 68 === 0) {
         currentTom.sleepiness++;
-        render();
+        refreshStats();
     } else if (seconds % 71 === 0) {
         currentTom.boredom++;
-        render();
-    } else if (seconds % 100 === 0) {
-        currentTom.age++;
-        render();
-    }
+        refreshStats();
+    } 
 };
 
 // Function checks if it's time for tom to die
@@ -200,10 +208,6 @@ render();
 // ...with special powers (extend the class)!
 // Add an excercise() method to your tomagotchi, that affects certain properties
 // Add anything you can think of... use your imagination!
-
-
-
-
 
 
 
