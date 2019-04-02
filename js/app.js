@@ -24,12 +24,7 @@ const tomFactory = {
     }
 };
 
-const goTomGo = () => {
-    $('#arena img').animate({
-        'left': '600px',
-        'bottom': '20px'    
-    }, 8000);
-}
+
 
 // Keeps track of the seconds
 let seconds = 0;
@@ -39,7 +34,7 @@ tomFactory.makeTom('Tommy-gochi', 'https://i.pinimg.com/originals/a8/a0/b1/a8a0b
 
 //function to put Tom on screen
 const makeTom = () => {
-    $('#arena').append(`<img src="${tomFactory.tomArr[0].imgFile}" height="150" width="128">`);
+    $('#arena').append(`<img src="${tomFactory.tomArr[0].imgFile}" height="150" width="140">`);
 }
 
 //lets user name their pet
@@ -94,6 +89,8 @@ const morphinTime = () => {
     if (currentTom.age > 3){ 
         currentTom.imgFile = 'http://i.imgur.com/vV0AA0q.jpg?1';
         $('#arena img').remove();
+        tomFactory.tomArr.pop();
+        tomFactory.makeTom('Tommy-gochi', 'http://www.nebeep.com/wp-content/uploads/2018/02/TomHaverford.jpg');
         makeTom();
         goTomGo();
     } 
@@ -116,6 +113,13 @@ const statTracker = () => {
     } 
 };
 
+const deathRattle = () => {
+        $('#arena img').remove();
+        $('#arena').append('<img src="http://www.animatedgif.net/devilish/skull_and_crossbones_e0.gif" height="150" width="128">');
+        $('#arena').css('display', 'flex');
+        $('#arena img').css('left', '0');
+}
+
 // Function checks if it's time for tom to die
 const isTomDead = () => {
     if (currentTom.hunger >= 10 || currentTom.sleepiness >= 10 || currentTom.boredom >= 10){
@@ -124,14 +128,15 @@ const isTomDead = () => {
         currentTom.imgFile = 'http://66.media.tumblr.com/tumblr_m8ich6yKbz1r0n9bmo3_250.gif';
         render();
         $('#heading').append('<div id="death"><h1>YOU KILLED TOMMY!<br>YOU MONSTER!</h1></div>');
-
+        deathRattle();
+        
     } else if (currentTom.hunger < 0 || currentTom.sleepiness < 0 || currentTom.boredom < 0){
         currentTom['alive'] = false;
         clearInterval(timer);
         currentTom.imgFile = 'http://66.media.tumblr.com/tumblr_m8ich6yKbz1r0n9bmo3_250.gif';
         render();
         $('#heading').append('<div id="death"><h1>YOU KILLED TOMMY!<br>YOU MONSTER!</h1></div>');
-        
+        deathRattle();
     } 
 };
 
@@ -176,7 +181,7 @@ const listenToStuff = () => {
 // Function adds to the seconds and call the other related functinos
 const secondsGoUp = () => {
     seconds ++;
-    console.log(seconds);
+    //console.log(seconds);
     
 
     morphinTime();
@@ -185,15 +190,24 @@ const secondsGoUp = () => {
 }
 
 const timer = setInterval(secondsGoUp, 100);
+
+
+const goTomGo = () => {
+    for(let i = 0; i < 10000; i++){
+        $('#arena img').animate({
+            'left': '600px',    
+            }, 3000);
+            
+        $('#arena img').animate({
+            'left': '0px'    
+            }, 3000);
+    }
+}
+
+
 render();
 
-
-
-
-
-
-
-// Morph your pet at certain ages. <-- BUTTONS STOP WORKING AFTER MORPH!! WTF!?!?
+// Morph your pet at certain ages. 
 
 
 // Animate your pet across the screen while it's alive.
