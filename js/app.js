@@ -37,12 +37,10 @@ const goTomGo = () => {
 };
 
 const goTommyTwo = () => {
-    for(let i = 0; i < 3; i++){
-        console.log('made it past for loop')
+    for(let i = 0; i < 10000; i++){        
         $('#upgrade').animate({
             'left': '600px',    
             }, 3000);
-        console.log('made it past animation 1')
         $('#upgrade').animate({
             'left': '0px'    
             }, 3000);
@@ -106,13 +104,13 @@ const render = () => {
 
 // Function checks if its time for tom to morph
 const morphinTime = () => { 
-    if (currentTom.age > 3){ 
+    if (seconds === 159){ 
         $('#arena img').remove();
         tomFactory.tomArr.pop();
         tomFactory.makeTom('Tommy-gochi', 'http://www.nebeep.com/wp-content/uploads/2018/02/TomHaverford.jpg');
         makeTommy();
         $('#arena img').attr('id', 'upgrade');
-        //goTommyTwo();
+        goTommyTwo();
     } 
 };
 

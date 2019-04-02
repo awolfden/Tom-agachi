@@ -149,4 +149,5 @@ ul {
 
 #upgrade {
     object-fit: cover;
+    position: relative;
 }
