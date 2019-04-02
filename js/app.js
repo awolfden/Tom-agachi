@@ -9,8 +9,7 @@ class Tomagachi {
         this.boredom = 0,
         this.age = 0,
         this.imgFile = imgFile,
-        this.lightsOn = true,
-        this.alive = true
+        this.lightsOn = true
     }
 }
 
@@ -33,7 +32,7 @@ let seconds = 0;
 tomFactory.makeTom('Tommy-gochi', 'https://i.pinimg.com/originals/a8/a0/b1/a8a0b1f02925966d3bcd341f9fe929fc.png');
 
 //function to put Tom on screen
-const makeTom = () => {
+const makeTommy = () => {
     $('#arena').append(`<img src="${tomFactory.tomArr[0].imgFile}" height="150" width="140">`);
 }
 
@@ -49,7 +48,6 @@ const makeBoard = () => {
     $('#tomagachi').append('<div id="arena"></div>');
     $('#stat-container').append('<div id="stats"><h1>Stats</h1><ul class="statList"></ul></div>');
     $('#button-container').append('<div id="buttons"><h1>Tommy Needs Attention</h1></div>');
-    
 }
 
 // makeStats puts the stats on the screen
@@ -78,7 +76,7 @@ const render = () => {
     makeBoard();
     makeStats();
     makeButtons();
-    makeTom();
+    makeTommy();
     listenToStuff();
 
     goTomGo();
@@ -87,12 +85,11 @@ const render = () => {
 // Function checks if its time for tom to morph
 const morphinTime = () => { 
     if (currentTom.age > 3){ 
-        currentTom.imgFile = 'http://i.imgur.com/vV0AA0q.jpg?1';
         $('#arena img').remove();
         tomFactory.tomArr.pop();
         tomFactory.makeTom('Tommy-gochi', 'http://www.nebeep.com/wp-content/uploads/2018/02/TomHaverford.jpg');
-        makeTom();
-        goTomGo();
+        makeTommy();
+        //goTomGo();
     } 
 };
 
@@ -103,6 +100,8 @@ const statTracker = () => {
         refreshStats();
     } else if (seconds % 67 === 0) {
         currentTom.sleepiness++;
+        currentTom.lightsOn = true;
+        $('#arena').css('background-image', 'url("https://www.cambridgema.gov/~/media/Images/sharedphotos/departmentphotos/City-COuncil.jpg?mw=767")');
         refreshStats();
     } else if (seconds % 71 === 0) {
         currentTom.boredom++;
@@ -122,22 +121,15 @@ const deathRattle = () => {
 
 // Function checks if it's time for tom to die
 const isTomDead = () => {
-    if (currentTom.hunger >= 10 || currentTom.sleepiness >= 10 || currentTom.boredom >= 10){
-        currentTom['alive'] = false;
+    if (currentTom.hunger < 0 || currentTom.sleepiness < 0 || currentTom.boredom < 0){
         clearInterval(timer);
-        currentTom.imgFile = 'http://66.media.tumblr.com/tumblr_m8ich6yKbz1r0n9bmo3_250.gif';
-        render();
         $('#heading').append('<div id="death"><h1>YOU KILLED TOMMY!<br>YOU MONSTER!</h1></div>');
         deathRattle();
-        
-    } else if (currentTom.hunger < 0 || currentTom.sleepiness < 0 || currentTom.boredom < 0){
-        currentTom['alive'] = false;
+    } else if (currentTom.hunger >= 10 || currentTom.sleepiness >= 10 || currentTom.boredom >= 10){
         clearInterval(timer);
-        currentTom.imgFile = 'http://66.media.tumblr.com/tumblr_m8ich6yKbz1r0n9bmo3_250.gif';
-        render();
         $('#heading').append('<div id="death"><h1>YOU KILLED TOMMY!<br>YOU MONSTER!</h1></div>');
         deathRattle();
-    } 
+    }
 };
 
 
@@ -161,31 +153,29 @@ const listenToStuff = () => {
     $('#buttons').on('click', (e) => {
         if(e.target.id === 'feed'){
             currentTom.hunger = currentTom.hunger-=1;
-            render();
+            refreshStats();
         } else if (e.target.id === 'lightsOff'){
             if (currentTom.lightsOn){
                 currentTom.sleepiness--;
-                render();
+                currentTom.lightsOn = false;
+                refreshStats();
                 $('#arena').css('background-image', 'url("https://townsquare.media/site/518/files/2017/11/Night-sky.jpg")');
             } 
 
         } else if (e.target.id === 'play'){
             currentTom.boredom = currentTom.boredom-=1;
-            render();
+            refreshStats();
         }
     });
 }
 
-
-
 // Function adds to the seconds and call the other related functinos
 const secondsGoUp = () => {
     seconds ++;
-    //console.log(seconds);
     
-
-    morphinTime();
+    //calls to functions that do things based on time passing
     statTracker();
+    morphinTime();
     isTomDead();
 }
 
@@ -206,11 +196,6 @@ const goTomGo = () => {
 
 
 render();
-
-// Morph your pet at certain ages. 
-
-
-// Animate your pet across the screen while it's alive.
 
 
 // Extras
