@@ -257,7 +257,7 @@ const statTracker = () => {
 
 const deathRattle = () => {
         $('#arena img').remove();
-        $('#arena').append('<img id="skull" src="http://www.animatedgif.net/devilish/skull_and_crossbones_e0.gif" height="150" width="128">');
+        $('#arena').append('<img id="skull" src="https://media3.giphy.com/media/wVcNP3TnXbl84/giphy.gif?cid=790b76115ca42e934e766c726f404fb7" height="150" width="128">');
         $('#arena').css('display', 'flex');
         $('#arena img').css({'display': 'flex', 'left': '0', 'border': '10px solid black', 'border-radius': '100px', 'object-fit': 'stretch'});
         $('#skull').animate({

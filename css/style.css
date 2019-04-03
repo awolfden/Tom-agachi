@@ -42,10 +42,11 @@ h1 {
 }
 
 #title {
-    font-size: 120px;
+    font-size: 130px;
     letter-spacing: 2.3px;
     font-family: 'just-a-dream', 'Alfa Slab One', cursive;
     padding: 15px;
+    color: rgb(43, 8, 43);
 }
 
 form {
