@@ -318,7 +318,15 @@ const listenToStuff = () => {
 
 // Function adds to the seconds and call the other related functinos
 const secondsGoUp = () => {
-    seconds ++;
+    if(seconds < 318){
+        seconds += 1;
+    } else if(seconds < 636){
+        seconds += 2;
+    } else {
+        seconds += 3;
+    }
+    
+console.log(seconds);
     
     //calls to functions that do things based on time passing
     statTracker();
