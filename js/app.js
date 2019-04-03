@@ -222,7 +222,7 @@ const morphinTime = () => {
     } else if (seconds === 318){
         $('#upgrade').remove();
         tomFactory.tomArr.pop();
-        tomFactory.makeTom('Tommy-gochi', 'http://i.imgur.com/LaDQN53.jpg');
+        tomFactory.makeTom('Tommy-gochi', 'https://nypdecider.files.wordpress.com/2018/01/aziz-golden-globes.png?w=646&h=431&crop=1');
         makeTommy();
         $('#arena img').attr('id', 'upgrade');
         goTommyThree();
@@ -275,7 +275,7 @@ const isTomDead = () => {
         deathRattle();
     } else if (currentTom.hunger >= 10 || currentTom.sleepiness >= 10 || currentTom.boredom >= 10){
         clearInterval(timer);
-        $('#arena').append('<div id="death"><h1>YOU KILLED TOMMY!<br>YOU MONSTER!</h1></div>');
+        $('#arena').append('<div id="death"><h1>YOU KILLED TOMMY!<br>YOU <span>MONSTER!</span></h1></div>');
         deathRattle();
     }
 };
