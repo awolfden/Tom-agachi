@@ -39,11 +39,103 @@ const goTomGo = () => {
 const goTommyTwo = () => {
     for(let i = 0; i < 10000; i++){        
         $('#upgrade').animate({
-            'left': '600px',    
-            }, 3000);
+            'left': '300px',
+            'bottom': '35px'    
+            }, 1500);
         $('#upgrade').animate({
-            'left': '0px'    
-            }, 3000);
+            'bottom': '0px',
+            'left': '600px'  
+            }, 1500);
+        $('#upgrade').animate({
+            'left': '300px',
+            'bottom': '-25px'  
+            }, 1500);
+        $('#upgrade').animate({
+            'bottom': '0px',
+            'left': '0px'  
+            }, 1500);
+    }
+};
+
+const goTommyThree = () => {
+    for(let i = 0; i < 10000; i++){        
+        $('#upgrade').animate({
+            'left': '200px',
+            'bottom': '35px'    
+            }, 1500);
+        $('#upgrade').animate({
+            'bottom': '-25px',
+            'left': '200px'  
+            }, 1500);
+        $('#upgrade').animate({
+            'left': '400px',
+            'bottom': '35px'  
+            }, 1500);
+        $('#upgrade').animate({
+            'bottom': '-25px',
+            'left': '400px'  
+            }, 1500);
+        $('#upgrade').animate({
+            'bottom': '35px',
+            'left': '600px'  
+            }, 1500);
+        $('#upgrade').animate({
+            'bottom': '0px',
+            'left': '0px'  
+            }, 1500);
+    }
+};
+
+const goTommyFour = () => {
+    for(let i = 0; i < 10000; i++){        
+        $('#upgrade').animate({
+            'left': '100px',
+            'bottom': '-25px'    
+            }, 500);
+        $('#upgrade').animate({
+            'left': '200px',
+            'bottom': '-40px'  
+            }, 500);
+        $('#upgrade').animate({
+            'left': '300px',
+            'bottom': '0px'  
+            }, 500);
+        $('#upgrade').animate({
+            'left': '400px',
+            'bottom': '25px'  
+            }, 500);
+        $('#upgrade').animate({
+            'left': '500px',
+            'bottom': '40px'  
+            }, 500);
+        $('#upgrade').animate({
+            'left': '600px',
+            'bottom': '0px'  
+            }, 500);
+        $('#upgrade').animate({
+            'left': '500px',
+            'bottom': '-25px'  
+            }, 500);
+        $('#upgrade').animate({
+            'left': '400px',
+            'bottom': '-40px'  
+            }, 500);
+        $('#upgrade').animate({
+            'left': '300px',
+            'bottom': '0px'  
+            }, 500);
+        $('#upgrade').animate({
+            'left': '200px',
+            'bottom': '25px'  
+            }, 500);
+        $('#upgrade').animate({
+            'left': '100px',
+            'bottom': '40px'  
+            }, 500);
+        $('#upgrade').animate({
+            'left': '0px',
+            'bottom': '0px'  
+            }, 500);
     }
 };
 
@@ -111,7 +203,21 @@ const morphinTime = () => {
         makeTommy();
         $('#arena img').attr('id', 'upgrade');
         goTommyTwo();
-    } 
+    } else if (seconds === 318){
+        $('#upgrade').remove();
+        tomFactory.tomArr.pop();
+        tomFactory.makeTom('Tommy-gochi', 'http://i.imgur.com/LaDQN53.jpg');
+        makeTommy();
+        $('#arena img').attr('id', 'upgrade');
+        goTommyThree();
+    } else if (seconds === 636){
+        $('#upgrade').remove();
+        tomFactory.tomArr.pop();
+        tomFactory.makeTom('Tommy-gochi', 'https://media.giphy.com/media/xb8zoHFCKU0Ra/giphy.gif');
+        makeTommy();
+        $('#arena img').attr('id', 'upgrade');
+        goTommyFour();
+    }
 };
 
 // Function checks if stats need updating based on time and udates them through render()
