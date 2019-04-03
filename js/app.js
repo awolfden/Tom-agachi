@@ -194,7 +194,7 @@ const refreshStats = () => {
 
 // makeButtons puts the buttons on the screen
 const makeButtons = () => {
-    $('#buttons').append('<div id="feed">Feed</div><div id="lightsOff">Turn Off Lights</div><div id="play">Play</div>');
+    $('#buttons').append('<div id="feed">Treat Yo Self!</div><div id="lightsOff">Tommy Go Night Night</div><div id="play">Hit the Snakehole Lounge</div>');
 }
 
 // Render function clears board and reloads current stats, links to listenToStuff
