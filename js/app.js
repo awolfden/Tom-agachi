@@ -271,7 +271,7 @@ const deathRattle = () => {
 const isTomDead = () => {
     if (currentTom.hunger < 0 || currentTom.sleepiness < 0 || currentTom.boredom < 0){
         clearInterval(timer);
-        $('#arena').append('<div id="death"><h1>YOU KILLED TOMMY!<br>YOU MONSTER!</h1></div>');
+        $('#arena').append('<div id="death"><h1>YOU KILLED TOMMY!<br>YOU <span>MONSTER!</span></h1></div>');
         deathRattle();
     } else if (currentTom.hunger >= 10 || currentTom.sleepiness >= 10 || currentTom.boredom >= 10){
         clearInterval(timer);
