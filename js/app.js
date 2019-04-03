@@ -9,7 +9,8 @@ class Tomagachi {
         this.boredom = 0,
         this.age = 0,
         this.imgFile = imgFile,
-        this.lightsOn = true
+        this.lightsOn = true,
+        this.alive = true
     }
 }
 
@@ -265,18 +266,24 @@ const deathRattle = () => {
             'width': '280',
             'top': '-30px' 
             }, 2000);
+        $('body').append('<audio autoplay><source src="ron-tom-faint.mp3" type="audio/mpeg"></audio>');
 }
 
 // Function checks if it's time for tom to die
 const isTomDead = () => {
     if (currentTom.hunger < 0 || currentTom.sleepiness < 0 || currentTom.boredom < 0){
+        currentTom.alive = false;
         clearInterval(timer);
         $('#arena').append('<div id="death"><h1>YOU KILLED TOMMY!<br>YOU <span>MONSTER!</span></h1></div>');
         deathRattle();
+        //$('body').append('<audio autoplay><source src="ron-tom-faint.mp3" type="audio/mpeg"></audio>');
+        
     } else if (currentTom.hunger >= 10 || currentTom.sleepiness >= 10 || currentTom.boredom >= 10){
+        currentTom.alive = false;
         clearInterval(timer);
         $('#arena').append('<div id="death"><h1>YOU KILLED TOMMY!<br>YOU <span>MONSTER!</span></h1></div>');
         deathRattle();
+        //$('body').append('<audio autoplay><source src="ron-tom-faint.mp3" type="audio/mpeg"></audio>');
     }
 };
 
@@ -300,6 +307,7 @@ const listenToStuff = () => {
     $('#buttons').on('click', (e) => {
         if(e.target.id === 'feed'){
             currentTom.hunger = currentTom.hunger-=1;
+            $('body').append('<audio autoplay><source src="treat-yo-self.mp3" type="audio/mpeg"></audio>');
             refreshStats();
         } else if (e.target.id === 'lightsOff'){
             if (currentTom.lightsOn){
@@ -307,11 +315,12 @@ const listenToStuff = () => {
                 currentTom.lightsOn = false;
                 refreshStats();
                 $('#arena').css('background-image', 'url("https://townsquare.media/site/518/files/2017/11/Night-sky.jpg")');
-            } 
-
+                $('body').append('<audio autoplay><source src="date-song.mp3" type="audio/mpeg"></audio>');
+            }
         } else if (e.target.id === 'play'){
             currentTom.boredom = currentTom.boredom-=1;
             refreshStats();
+            $('body').append('<audio autoplay><source src="is-that-genuine.mp3" type="audio/mpeg"></audio>');
         }
     });
 }
