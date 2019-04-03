@@ -27,7 +27,7 @@ const tomFactory = {
 const goTomGo = () => {
     for(let i = 0; i < 10000; i++){
         $('#arena img').animate({
-            'left': '600px',    
+            'left': '990px',    
             }, 3000);
             
         $('#arena img').animate({
@@ -39,20 +39,20 @@ const goTomGo = () => {
 const goTommyTwo = () => {
     for(let i = 0; i < 10000; i++){        
         $('#upgrade').animate({
-            'left': '300px',
-            'bottom': '35px'    
+            'left': '495px',
+            'top': '140px'    
             }, 1500);
         $('#upgrade').animate({
-            'bottom': '0px',
-            'left': '600px'  
+            'left': '990px',
+            'top': '50px'  
             }, 1500);
         $('#upgrade').animate({
-            'left': '300px',
-            'bottom': '-25px'  
+            'left': '495px',
+            'top': '-40px'  
             }, 1500);
         $('#upgrade').animate({
-            'bottom': '0px',
-            'left': '0px'  
+            'left': '0px',
+            'top': '50px'  
             }, 1500);
     }
 };
@@ -60,28 +60,40 @@ const goTommyTwo = () => {
 const goTommyThree = () => {
     for(let i = 0; i < 10000; i++){        
         $('#upgrade').animate({
-            'left': '200px',
-            'bottom': '35px'    
+            'left': '247.5px',
+            'top': '140px'    
             }, 1000);
         $('#upgrade').animate({
-            'bottom': '-25px',
-            'left': '200px'  
+            'left': '247.5px',
+            'top': '-40px'  
             }, 1000);
         $('#upgrade').animate({
-            'left': '400px',
-            'bottom': '35px'  
+            'left': '495px',
+            'top': '140px'  
             }, 1000);
         $('#upgrade').animate({
-            'bottom': '-25px',
-            'left': '400px'  
+            'left': '495px',
+            'top': '-40px'  
             }, 1000);
         $('#upgrade').animate({
-            'bottom': '35px',
-            'left': '600px'  
+            'left': '742.5px',
+            'top': '140px'  
             }, 1000);
         $('#upgrade').animate({
-            'bottom': '0px',
-            'left': '0px'  
+            'left': '742.5px',
+            'top': '-40px'  
+            }, 1000);
+        $('#upgrade').animate({
+            'left': '990px',
+            'top': '140px'  
+            }, 1000);
+        $('#upgrade').animate({
+            'left': '990px',
+            'top': '-40px'  
+            }, 1000);
+        $('#upgrade').animate({
+            'left': '0px',
+            'top': '50px'  
             }, 1000);
     }
 };
@@ -89,53 +101,57 @@ const goTommyThree = () => {
 const goTommyFour = () => {
     for(let i = 0; i < 10000; i++){        
         $('#upgrade').animate({
-            'left': '100px',
-            'bottom': '-25px'    
-            }, 500);
+            'left': '247.5px',
+            'top': '140px',
+            'height': '150',
+            'width': '140'    
+            }, 1000);
         $('#upgrade').animate({
-            'left': '200px',
-            'bottom': '-40px'  
-            }, 500);
+            'left': '247.5px',
+            'top': '-40px',
+            'height': '300',
+            'width': '280'    
+            }, 1000);
         $('#upgrade').animate({
-            'left': '300px',
-            'bottom': '0px'  
-            }, 500);
+            'left': '495px',
+            'top': '140px',
+            'height': '150',
+            'width': '140'    
+            }, 1000);
         $('#upgrade').animate({
-            'left': '400px',
-            'bottom': '25px'  
-            }, 500);
+            'left': '495px',
+            'top': '-40px',
+            'height': '300',
+            'width': '280'     
+            }, 1000);
         $('#upgrade').animate({
-            'left': '500px',
-            'bottom': '40px'  
-            }, 500);
+            'left': '742.5px',
+            'top': '140px',
+            'height': '150',
+            'width': '140'   
+            }, 1000);
         $('#upgrade').animate({
-            'left': '600px',
-            'bottom': '0px'  
-            }, 500);
+            'left': '742.5px',
+            'top': '-40px',
+            'height': '300',
+            'width': '280'    
+            }, 1000);
         $('#upgrade').animate({
-            'left': '500px',
-            'bottom': '-25px'  
-            }, 500);
+            'left': '990px',
+            'top': '140px',
+            'height': '150',
+            'width': '140'    
+            }, 1000);
         $('#upgrade').animate({
-            'left': '400px',
-            'bottom': '-40px'  
-            }, 500);
-        $('#upgrade').animate({
-            'left': '300px',
-            'bottom': '0px'  
-            }, 500);
-        $('#upgrade').animate({
-            'left': '200px',
-            'bottom': '25px'  
-            }, 500);
-        $('#upgrade').animate({
-            'left': '100px',
-            'bottom': '40px'  
-            }, 500);
+            'left': '990px',
+            'top': '-40px',    
+            }, 1000);
         $('#upgrade').animate({
             'left': '0px',
-            'bottom': '0px'  
-            }, 500);
+            'top': '50px',
+            'height': '150',
+            'width': '140'    
+            }, 1000);
     }
 };
 
@@ -241,10 +257,14 @@ const statTracker = () => {
 
 const deathRattle = () => {
         $('#arena img').remove();
-        $('#arena').append('<img src="http://www.animatedgif.net/devilish/skull_and_crossbones_e0.gif" height="150" width="128">');
+        $('#arena').append('<img id="skull" src="http://www.animatedgif.net/devilish/skull_and_crossbones_e0.gif" height="150" width="128">');
         $('#arena').css('display', 'flex');
         $('#arena img').css({'display': 'flex', 'left': '0', 'border': '10px solid black', 'border-radius': '100px', 'object-fit': 'stretch'});
-
+        $('#skull').animate({
+            'height': '300',
+            'width': '280',
+            'top': '-30px' 
+            }, 2000);
 }
 
 // Function checks if it's time for tom to die
