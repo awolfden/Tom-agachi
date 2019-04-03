@@ -62,27 +62,27 @@ const goTommyThree = () => {
         $('#upgrade').animate({
             'left': '200px',
             'bottom': '35px'    
-            }, 1500);
+            }, 1000);
         $('#upgrade').animate({
             'bottom': '-25px',
             'left': '200px'  
-            }, 1500);
+            }, 1000);
         $('#upgrade').animate({
             'left': '400px',
             'bottom': '35px'  
-            }, 1500);
+            }, 1000);
         $('#upgrade').animate({
             'bottom': '-25px',
             'left': '400px'  
-            }, 1500);
+            }, 1000);
         $('#upgrade').animate({
             'bottom': '35px',
             'left': '600px'  
-            }, 1500);
+            }, 1000);
         $('#upgrade').animate({
             'bottom': '0px',
             'left': '0px'  
-            }, 1500);
+            }, 1000);
     }
 };
 
@@ -243,7 +243,8 @@ const deathRattle = () => {
         $('#arena img').remove();
         $('#arena').append('<img src="http://www.animatedgif.net/devilish/skull_and_crossbones_e0.gif" height="150" width="128">');
         $('#arena').css('display', 'flex');
-        $('#arena img').css('left', '0');
+        $('#arena img').css({'display': 'flex', 'left': '0', 'border': '10px solid black', 'border-radius': '100px', 'object-fit': 'stretch'});
+
 }
 
 // Function checks if it's time for tom to die
