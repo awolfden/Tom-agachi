@@ -1,5 +1,9 @@
 console.log('Tom-agachi');
 
+const playGame = () => {
+
+
+
 // Creates Tamagachi class
 class Tomagachi {
     constructor(name, imgFile){
@@ -325,7 +329,7 @@ const listenToStuff = () => {
     });
 }
 
-// Function adds to the seconds and call the other related functinos
+// Function adds to the seconds and call the other related functions
 const secondsGoUp = () => {
     if(seconds < 318){
         seconds += 1;
@@ -358,4 +362,15 @@ render();
 // Add anything you can think of... use your imagination!
 
 
+}
 
+const welcomeScreen = () => {
+    $('body').append('<div id="flex-container"><div id="welcome"><h2>Brought to you by Entertainment 720</h2><h3>Click on Tommy to get started!</h3></div></div>');
+    $('#welcome').append('<button></button>');
+    $('button').on('click', () => {
+        playGame();
+        $('#welcome').remove();
+    })
+}
+
+welcomeScreen();
