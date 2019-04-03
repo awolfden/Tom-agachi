@@ -212,6 +212,12 @@ span {
     border-radius: 25px;
 }
 
+#welcome audio {
+    color:#2e2561;
+    height: 15px;
+    width: 250px
+}
+
 #welcome button:hover {
     border-color: #2e2561;
 }

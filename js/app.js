@@ -280,14 +280,12 @@ const isTomDead = () => {
         clearInterval(timer);
         $('#arena').append('<div id="death"><h1>YOU KILLED TOMMY!<br>YOU <span>MONSTER!</span></h1></div>');
         deathRattle();
-        //$('body').append('<audio autoplay><source src="ron-tom-faint.mp3" type="audio/mpeg"></audio>');
         
     } else if (currentTom.hunger >= 10 || currentTom.sleepiness >= 10 || currentTom.boredom >= 10){
         currentTom.alive = false;
         clearInterval(timer);
         $('#arena').append('<div id="death"><h1>YOU KILLED TOMMY!<br>YOU <span>MONSTER!</span></h1></div>');
         deathRattle();
-        //$('body').append('<audio autoplay><source src="ron-tom-faint.mp3" type="audio/mpeg"></audio>');
     }
 };
 
@@ -366,7 +364,8 @@ render();
 
 const welcomeScreen = () => {
     $('body').append('<div id="flex-container"><div id="welcome"><h2>Brought to you by Entertainment 720</h2><h3>Click on Tommy to get started!</h3></div></div>');
-    $('#welcome').append('<button></button>');
+    $('#welcome').append('<button></button><br>');
+    $('#welcome').append('<audio controls><source src="Ginuwine.mp3" type="audio/mpeg"></audio>');
     $('button').on('click', () => {
         playGame();
         $('#welcome').remove();
